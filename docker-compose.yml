@@ -1,0 +1,25 @@
+version: '3'
+services:
+  eureka-server:
+    image: discovery-server-v1
+    container_name: discovery-server
+    build:
+      context: ./discovery-server
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8761:8761"
+
+  config-server-1:
+    image: config-server-v1
+    container_name: config-server
+    build:
+      context: ./hazelcast-server
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_URI: http://eureka-server:8761/eureka
+    links:
+      - eureka-server:eureka-server
