@@ -1,5 +1,5 @@
 server:
-  port: 8762
+  port: 8888
 
 management:
   endpoints:
@@ -11,22 +11,18 @@ spring:
   profiles:
     active: git
   application:
-    name: ppe-config-server
+    name: config-server
   cloud:
     config:
       override-system-properties: false
       server:
         git:
-          uri: https://github.com/prasanna29387/ppe.git
+          uri: https://github.com/athulravindran87/spring-cloud-config.git
           clone-on-start: true
           search-paths:
-            ppe-config-server/src/main/resources/config/,
-            ppe-config-server/src/main/resources/config/ppe-admin-server/,
-            ppe-config-server/src/main/resources/config/ppe-email-service/,
-            ppe-config-server/src/main/resources/config/ppe-payroll-service/,
-            ppe-config-server/src/main/resources/config/ppe-orchestration-service/,
-            ppe-config-server/src/main/resources/config/ppe-backup-service/,
-            ppe-config-server/src/main/resources/config/ppe-data-store
+            config-server/src/main/resources/config/,
+            config-server/src/main/resources/config/client-service-1/,
+            config-server/src/main/resources/config/client-service-2/
           username: prasanna29387
           password: Yamu2429$
 eureka:

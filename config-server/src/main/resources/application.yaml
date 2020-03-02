@@ -1,5 +1,5 @@
 server:
-  port: 8762
+  port: 8888
 
 management:
   info:
@@ -24,16 +24,10 @@ spring:
         native:
           search-locations:
             classpath:/config/,
-            classpath:/config/ppe-admin-server,
-            classpath:/config/ppe-email-service,
-            classpath:/config/ppe-payroll-service,
-            classpath:/config/ppe-orchestration-service,
-            classpath:/config/ppe-backup-service,
-            classpath:/config/ppe-data-store
-
-
+            classpath:/config/client-service-1,
+            classpath:/config/client-service-2
   application:
-    name: ppe-config-server
+    name: config-server
 eureka:
   client:
     enabled: true
@@ -51,21 +45,3 @@ eureka:
     appname: ${spring.application.name}
     lease-renewal-interval-in-seconds: 25
     lease-expiration-duration-in-seconds: 10
-
-
-togglz:
-  enabled: true # Enable Togglz for the application.
-  feature-enums: com.athul.common.togglz.PpeFeatures # The feature states. Only needed if feature states are stored in application properties.
-  cache:
-    enabled: true # Enable feature state caching.
-    time-to-live: 30 # The time after which a cache entry will expire.
-    time-unit: seconds # The time unit as java.util.concurrent.TimeUnit enum name (one of "nanoseconds", "microseconds", "milliseconds", "seconds", "minutes", "hours", "days").
-  console:
-    enabled: true # Enable admin console.
-    path: /togglz-console # The path of the admin console when enabled.
-    secured: false
-    use-management-port: false
-  endpoint: # Only for Spring Boot 1.x (for Spring Boot 2.x see https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html)
-    id: togglz # The endpoint identifier.
-    enabled: true # Enable actuator endpoint.
-    sensitive: false # Indicates if the endpoint exposes sensitive information.
