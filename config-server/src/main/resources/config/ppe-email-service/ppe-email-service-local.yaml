@@ -1,0 +1,30 @@
+server:
+  port: 8764
+spring:
+  profiles:
+    active: local
+  cloud:
+    config:
+      override-system-properties: false
+  zipkin:
+    base-url: http://ppe-zipkin-server/
+  sleuth:
+    sampler:
+      rate: 1.0
+
+email:
+  poller:
+    file:
+      download:
+        location: /Users/Athul/email-backups/
+  user-name: yaminishanky@gmail.com
+  password: '{cipher}0c674da7d8ab65cd41004038d76752efaf85257c0e4913ec6efa378e9e8502f424d0d98dcc33118929035d503315500f'
+  keyword: Payroll
+
+hystrix:
+  command:
+    callMainProcess:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 200000

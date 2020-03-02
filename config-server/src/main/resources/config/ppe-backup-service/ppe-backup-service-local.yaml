@@ -1,0 +1,16 @@
+server:
+  port: 8767
+spring:
+  profiles:
+    active: local
+  cloud:
+    config:
+      override-system-properties: false
+  zipkin:
+    base-url: http://ppe-zipkin-server/
+  sleuth:
+    sampler:
+      rate: 1.0
+
+clients:
+  name: immanuel_agencies,saisri_lables,Client Original,system

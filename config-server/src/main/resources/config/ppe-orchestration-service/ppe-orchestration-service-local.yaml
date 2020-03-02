@@ -1,0 +1,17 @@
+server:
+  port: 8766
+spring:
+  profiles:
+    active: local
+  cloud:
+    config:
+      override-system-properties: false
+  zipkin:
+    base-url: http://ppe-zipkin-server/
+  sleuth:
+    sampler:
+      rate: 1.0
+
+feign:
+  hystrix:
+    enabled: true

@@ -1,0 +1,113 @@
+server:
+  port: 8765
+spring:
+  profiles:
+    active: local
+  cloud:
+    config:
+      override-system-properties: false
+  zipkin:
+    base-url: http://ppe-zipkin-server/
+  sleuth:
+    sampler:
+      rate: 1.0
+
+ufs_kone:
+  name: UNITED FACILITIES SERVICES
+  address: Old No.20/New No.2, First Floor,\n\t2nd Cross Street,Indira Nagar, Adyar,\n\tChennai, Tamil Nadu 600020, India \n 22546500
+  pmrpy: N
+  earnings: format1
+
+immanuel_agencies:
+  name: IMMANUEL AGENCIES
+  address: 11 Jawaharlal Street, New Perungalathur\n\tSrinivasa Nagar ,Chennai 600 063\n\tMobile No - 98400 48727
+  pmrpy: N
+  earnings: format2
+
+saisri_lables:
+  name: SAI SRI LABELS INDIA PVT LTD
+  address: Plot No:B-32(B), SIDCO Industrial Estate,\n\tMaraimalai nagar, Kancheepuram District, Tamil Nadu - 603209
+  pmrpy: Y
+  earnings: format3
+
+info:
+  employers:
+    - templateName: aptiv
+      address: A-22, Sipcot Ind'l Growth Center, Oragadam, Sriperumbudur Taluk, Kancheepuram Dist, Chennai 600053
+      gstNo: 33AAACD0226E1ZI
+
+    - templateName: arvos
+      address: Plot No. 1, Phase V, 8th Avenue, 1st Cross Road, Mahindra World City, Chengalpattu – Tk, Kancheepuram(Dt.), Tamilnadu- 603004, India
+      gstNo: 33AACCO0035E1Z6
+
+    - templateName: bosch
+      address: OFF NH 06 BAMBHORI, DARANGAON(TALUK), JALGAON(DISTRICT), MAHARASHTRA, INDIA PIN 425001.
+      gstNo: 27AABCF7965P1ZT
+
+    - templateName: daewon
+      address: Papparambakkam Village
+      gstNo: 33AACCD6823B1Z7
+
+    - templateName: flex
+      address: DTA Unit PlaceHolder, No. 381, Padur road, Kuthambakkam village, Poonamallee TK, Kancheepuram Dist.
+      gstNo: 33AAACF5248E1Z0
+
+    - templateName: flex-1
+      address: Plot No.5, Phase II, Sipcot Indl. Park, Sandavellore Village, Sriperumbudur Tk., Kancheepuram Dist.
+      gstNo: 33AAACF5248E1Z0
+
+    - templateName: im_amis
+      address: S.No 216, Vedavakkam Village, Madhurandhagam Taluk, Kancheepuram Dist 603303
+      gstNo: 33AACCI4687E1ZM
+
+    - templateName: im_gears
+      address: S.No 219, Vedavakkam Village, Madhurandhagam Taluk, Kancheepuram Dist 603303
+      gstNo: 33AAACI1606H1Z5
+
+    - templateName: immanuel_agencies
+      address: 11 Jawaharlal Street, New Perungalathur\n\tSrinivasa Nagar ,Chennai 600 063\n\tMobile No - 98400 48727
+      gstNo:
+
+    - templateName: kosei_minda
+      address: SIPCOT Industrial Park, Oragadam Expension Scheme, Mathur Post, Sriperumbudur Taluk, Kanchipuram - 602105
+      gstNo: 33AADCV5849G1Z6
+
+    - templateName: motherson_pondur
+      address: Pondur. Sriperumbudur
+      gstNo: 33AAACM0405A1ZK
+
+    - templateName: motherson_guru_cl
+      address: Survey No 181 to 186, Kuruvan Medu village, Chengalpattu Taluk, Kancheepuram Dist.
+      gstNo: 33AAACM0405A2ZJ
+
+    - templateName: motherson_guru_hk
+      address: Survey No 181 to 186, Kuruvan Medu village, Chengalpattu Taluk, Kancheepuram Dist.
+      gstNo: 33AAACM0405A2ZJ
+
+    - templateName: motherson_oragadam_cl
+      address: R.Nos.1042, Vadakkapattu Village, Sriperumbuthur Taluk, Kancheepuram Dist - 603204.
+      gstNo: 33AAACM0405A1ZK
+
+    - templateName: motherson_oragadam_hk
+      address: R.Nos.1042, Vadakkapattu Village, Sriperumbuthur Taluk, Kancheepuram Dist - 603204.
+      gstNo: 33AAACM0405A1ZK
+
+    - templateName: motherson_walajahbad_cl
+      address: SURVEY NO.348/1A,1B,355/3 NATHANALLUR & UTHUKADU VILLAGE, WALAJABAD TALUK, KANCHIPURAM DISTRICT - 631 605.
+      gstNo: 33AAACM0405A1ZK
+
+    - templateName: motherson_walajahbad_hk
+      address: SURVEY NO.348/1A,1B,355/3 NATHANALLUR & UTHUKADU VILLAGE, WALAJABAD TALUK, KANCHIPURAM DISTRICT - 631 605.
+      gstNo: 33AAACM0405A1ZK
+
+    - templateName: sai_labels
+      address: Plot No:B-32(B), SIDCO Industrial Estate,\n\tMaraimalai nagar, Kancheepuram District, Tamil Nadu - 603209
+      gstNo:
+
+    - templateName: wheels_india
+      address: Singaperumal Koil Road, Sriperumbudur, Kanchipuram Dist, Tamil Nadu - 602105
+      gstNo: 33AAACW0315K1ZO
+
+    - templateName: yamaha
+      address: Plot No VV1, SIPCOT Industrial Park, Vallam Vadagal Village, Sriperumbudur - 602105, Tamilnadu, India.
+      gstNo: 33AABCI7552FIZR

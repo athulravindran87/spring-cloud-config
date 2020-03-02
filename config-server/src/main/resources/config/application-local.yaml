@@ -1,0 +1,65 @@
+spring:
+  profiles:
+    active: local
+  cloud:
+    client.hostname: ${spring.cloud.client.ip-address:localhost}
+
+
+myhrp:
+  service:
+    ppe-orchestration-service:
+      name: ppe-orchestration-service
+      main-url: /begin-main-process
+    payroll:
+      name: ppe-payroll-service
+      process: /process-pay-roll
+    cloud-backup:
+      name: ppe-backup-service
+      backup: /cloud-backup
+    email-service:
+      name: ppe-email-service
+      send-email: /send-email
+  hazelcast:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+eureka:
+  client:
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+    ip-address: ${POD_IP:${spring.cloud.client.ip-address:localhost}}
+    hostname: ${POD_IP:${spring.cloud.client.ip-address:localhost}}
+    status-page-url: http://${eureka.instance.hostname}:${server.port}/actuator/info
+    health-check-url: http://${eureka.instance.hostname}:${server.port}/actuator/health
+    home-page-url: http://${eureka.instance.hostname}:${server.port}/actuator/env
+    appname: ${spring.application.name}
+    lease-renewal-interval-in-seconds: 25
+    lease-expiration-duration-in-seconds: 10
+
+
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 160000000
+        readTimeout: 160000000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 160000000
