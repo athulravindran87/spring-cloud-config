@@ -111,12 +111,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.eclipse.collections</groupId>
-                <artifactId>eclipse-collections</artifactId>
-                <version>9.2.0</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -137,12 +131,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-maven</artifactId>
-                <version>1.4.8</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -216,35 +204,6 @@
                     </executions>
                 </plugin>
 
-                <plugin>
-                    <groupId>org.pitest</groupId>
-                    <artifactId>pitest-maven</artifactId>
-                    <version>1.4.8</version>
-                    <configuration>
-                        <targetClasses>
-                            <param>com.athul*</param>
-                        </targetClasses>
-                        <targetTests>
-                            <param>com.athul.AllTests</param>
-                        </targetTests>
-                        <avoidCallsTo>
-                            <avoidCallsTo>org.apache.commons.lang3.time</avoidCallsTo>
-                            <avoidCallsTo>java.util.logging.Logging</avoidCallsTo>
-                            <avoidCallsTo>ch.qos.logback</avoidCallsTo>
-                            <avoidCallsTo>org.slf4j</avoidCallsTo>
-                            <avoidCallsTo>org.apache.log4j</avoidCallsTo>
-                            <avoidCallsTo>org.apache.commons.logging</avoidCallsTo>
-                        </avoidCallsTo>
-                        <failWhenNoMutations>false</failWhenNoMutations>
-                        <threads>3</threads>
-                        <verbose>false</verbose>
-                        <timeoutConstant>10000</timeoutConstant>
-                        <outputFormats>
-                            <outputFormat>HTML</outputFormat>
-                            <outputFormat>XML</outputFormat>
-                        </outputFormats>
-                    </configuration>
-                </plugin>
 
                 <plugin>
                     <groupId>pl.project13.maven</groupId>
@@ -287,21 +246,6 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>pitest</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.pitest</groupId>
-                        <artifactId>pitest-maven</artifactId>
-                        <configuration>
-                            <mutationThreshold>90</mutationThreshold>
-                            <coverageThreshold>95</coverageThreshold>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
 
         <profile>
             <id>gcp</id>
