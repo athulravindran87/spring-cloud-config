@@ -5,23 +5,6 @@ spring:
     client.hostname: ${spring.cloud.client.ip-address:localhost}
 
 
-myhrp:
-  service:
-    ppe-orchestration-service:
-      name: ppe-orchestration-service
-      main-url: /begin-main-process
-    payroll:
-      name: ppe-payroll-service
-      process: /process-pay-roll
-    cloud-backup:
-      name: ppe-backup-service
-      backup: /cloud-backup
-    email-service:
-      name: ppe-email-service
-      send-email: /send-email
-  hazelcast:
-    enabled: true
-
 management:
   endpoints:
     web:
