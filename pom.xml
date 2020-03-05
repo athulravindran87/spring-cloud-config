@@ -32,6 +32,7 @@
     <modules>
         <module>discovery-server</module>
         <module>config-server</module>
+        <module>client-service-1</module>
     </modules>
 
     <dependencies>
