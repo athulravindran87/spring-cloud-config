@@ -1,0 +1,6 @@
+server:
+  port: 8764
+
+test:
+  name: Athul
+  phone: 123-456-7891
