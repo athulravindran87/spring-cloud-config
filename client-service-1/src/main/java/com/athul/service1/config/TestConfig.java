@@ -6,7 +6,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "test")
+@ConfigurationProperties("test")
 @Data
 @RefreshScope
 public class TestConfig {
