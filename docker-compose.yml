@@ -1,8 +1,8 @@
 version: '3'
 services:
   eureka-server:
-    image: discovery-server-v1
-    container_name: discovery-server
+    image: discovery-server-v1-cc
+    container_name: discovery-server-cc
     build:
       context: ./discovery-server
       dockerfile: deploy/Dockerfile
@@ -10,8 +10,8 @@ services:
       - "8761:8761"
 
   config-server:
-    image: config-server-v1
-    container_name: config-server
+    image: config-server-v1-cc
+    container_name: config-server-cc
     build:
       context: ./config-server
       dockerfile: deploy/Dockerfile
@@ -25,7 +25,7 @@ services:
       - eureka-server:eureka-server
 
   client-config-first:
-    image: client-config-first-v1
+    image: client-config-first-v1-cc
     container_name: client-config-first
     build:
       context: ./client-config-first
