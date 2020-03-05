@@ -14,4 +14,4 @@ WORKDIR /tmp
 EXPOSE 8888
 
 # Run the jar file
-ENTRYPOINT ["java","-jar","ppe-config-server.jar"]
+ENTRYPOINT ["java","-jar","config-server.jar"]

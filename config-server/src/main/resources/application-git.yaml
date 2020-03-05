@@ -21,8 +21,7 @@ spring:
           clone-on-start: true
           search-paths:
             config-server/src/main/resources/config/,
-            config-server/src/main/resources/config/client-service-1/,
-            config-server/src/main/resources/config/client-service-2/
+            config-server/src/main/resources/config/client-config-first
           username: prasanna29387
           password: Yamu2429$
 eureka:

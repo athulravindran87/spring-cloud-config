@@ -16,7 +16,7 @@ A Spring Cloud Config Server - A demonstration of Discovery first and Config fir
 | ------------------- | -----| -------------------------------|
 | discover-server     | 8761 | Eureka discovery server        |
 | config-server       | 8888 | Cloud Config Server            |
-| client-service-1    | 8763 | client service instance 1      |
+| client-config-first    | 8763 | client service instance 1      |
 | client-service-2    | 8764 | client service instance 2      |
 
 ## What's in here ??

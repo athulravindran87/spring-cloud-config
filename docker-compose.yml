@@ -9,11 +9,11 @@ services:
     ports:
       - "8761:8761"
 
-  config-server-1:
+  config-server:
     image: config-server-v1
     container_name: config-server
     build:
-      context: ./hazelcast-server
+      context: ./config-server
       dockerfile: deploy/Dockerfile
     ports:
       - "8888:8888"
@@ -23,3 +23,21 @@ services:
       EUREKA_URI: http://eureka-server:8761/eureka
     links:
       - eureka-server:eureka-server
+
+  client-config-first:
+    image: client-config-first-v1
+    container_name: client-config-first
+    build:
+      context: ./client-config-first
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8763:8763"
+    depends_on:
+      - eureka-server
+      - config-server
+    environment:
+      EUREKA_URI: http://eureka-server:8761/eureka
+      CONFIG_URI: http://config-server:8888
+    links:
+      - eureka-server:eureka-server
+      - config-server:config-server
