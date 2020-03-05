@@ -32,27 +32,15 @@ public class ApplicationIT {
         Thread.sleep(10000);
     }
 
-
     @Test
     public void testConfigServerIsUpAndCheckPayrollProperties() throws Exception {
 
         restTemplate = new RestTemplate();
 
-        ResponseEntity<String> result = restTemplate.getForEntity(getHost() + "/ppe-payroll-service/local", String.class);
+        ResponseEntity<String> result = restTemplate.getForEntity(getHost() + "/client-config-first/local", String.class);
         assertThat(result.getBody(), notNullValue());
         assertThat(result.getBody(), containsString("server.port"));
-        assertThat(result.getBody(), containsString("8765"));
-    }
-
-    @Test
-    public void testConfigServerIsUpAndCheckEmailServerProperties() throws Exception {
-        restTemplate = new RestTemplate();
-
-        ResponseEntity<String> result = restTemplate.getForEntity(getHost() + "/ppe-email-service/local", String.class);
-        assertThat(result.getBody(), notNullValue());
-        assertThat(result.getBody(), containsString("server.port"));
-        assertThat(result.getBody(), containsString("8764"));
-        assertThat(result.getBody(), containsString("email.user-name"));
+        assertThat(result.getBody(), containsString("8763"));
     }
 
     private String getHost() {
