@@ -1,0 +1,6 @@
+server:
+  port: 8763
+
+test:
+  name: Athul
+  phone: 123-456-7890
