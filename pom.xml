@@ -33,6 +33,7 @@
         <module>discovery-server</module>
         <module>config-server</module>
         <module>client-config-first</module>
+        <module>client-discovery-first</module>
     </modules>
 
     <dependencies>

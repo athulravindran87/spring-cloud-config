@@ -21,6 +21,7 @@ services:
       - eureka-server
     environment:
       EUREKA_URI: http://eureka-server:8761/eureka
+      spring.profiles.active: git
     links:
       - eureka-server:eureka-server
 
@@ -38,6 +39,22 @@ services:
     environment:
       EUREKA_URI: http://eureka-server:8761/eureka
       CONFIG_URI: http://config-server:8888
+    links:
+      - eureka-server:eureka-server
+      - config-server:config-server
+  client-discovery-first:
+    image: client-discovery-first-v1-cc
+    container_name: client-discovery-first
+    build:
+      context: ./client-discovery-first
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8764:8764"
+    depends_on:
+      - eureka-server
+      - config-server
+    environment:
+      EUREKA_URI: http://eureka-server:8761/eureka
     links:
       - eureka-server:eureka-server
       - config-server:config-server
