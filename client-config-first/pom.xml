@@ -9,9 +9,9 @@
     </parent>
 
     <groupId>com.athul</groupId>
-    <artifactId>client-service-1</artifactId>
+    <artifactId>client-config-first</artifactId>
     <version>0.1-SNAPSHOT</version>
-    <name>client-service-1</name>
+    <name>client-config-first</name>
     <description>Service 1</description>
 
     <properties>

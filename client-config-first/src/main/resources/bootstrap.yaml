@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name: client-service-1
+    name: client-config-first
   profiles:
     active: local
   cloud:
