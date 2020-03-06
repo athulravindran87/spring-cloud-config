@@ -15,3 +15,11 @@ spring:
         service-id: config-server
 server:
   port: 8764
+
+eureka:
+  client:
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}

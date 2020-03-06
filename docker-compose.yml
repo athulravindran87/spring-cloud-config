@@ -42,6 +42,7 @@ services:
     links:
       - eureka-server:eureka-server
       - config-server:config-server
+
   client-discovery-first:
     image: client-discovery-first-v1-cc
     container_name: client-discovery-first
