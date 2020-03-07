@@ -1,70 +1,94 @@
 # Spring Cloud Config Server
 A Spring Cloud Config Server - A demonstration of Discovery first and Config first.
 
-[![Build Status](http://34.68.205.106/jenkins/buildStatus/icon?job=hazelcast-cluster-master-build&subject=Master%20Build)](http://34.68.205.106/jenkins/job/hazelcast-cluster-master-build/)       [![Build Status](http://34.68.205.106/jenkins/buildStatus/icon?job=hazelcast-cluster-mutation-test&subject=Mutation%20Test)](http://34.68.205.106/jenkins/job/hazelcast-cluster-mutation-test/)    [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e9e89cc98f5d4b0f9fd80d18c9935981)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=athulravindran87/hazelcast-cluster&amp;utm_campaign=Badge_Grade)     [![Quality Gate Status](http://34.67.51.46/api/project_badges/measure?project=com.athul%3Ahazelcast-cluster&metric=alert_status)](http://34.67.51.46/dashboard?id=com.athul%3Ahazelcast-cluster)       [![Bugs](http://34.67.51.46/api/project_badges/measure?project=com.athul%3Ahazelcast-cluster&metric=bugs)](http://34.67.51.46/dashboard?id=com.athul%3Ahazelcast-cluster)    [![Coverage](http://34.67.51.46/api/project_badges/measure?project=com.athul%3Ahazelcast-cluster&metric=coverage)](http://34.67.51.46/dashboard?id=com.athul%3Ahazelcast-cluster)    [![Technical Debt](http://34.67.51.46/api/project_badges/measure?project=com.athul%3Ahazelcast-cluster&metric=sqale_index)](http://34.67.51.46/dashboard?id=com.athul%3Ahazelcast-cluster)   [![Maintainability Rating](http://34.67.51.46/api/project_badges/measure?project=com.athul%3Ahazelcast-cluster&metric=sqale_rating)](http://34.67.51.46/dashboard?id=com.athul%3Ahazelcast-cluster)
-
-## Technical Stack:                   	         
+## Stack:                   	         
 1) Eureka Discovery Service.	         	             
 2) Cloud Config Server                          
-4) Spring Boot 2
-5) Docker
-6) Google Cloud - Google Kubernetes Engine
+3) Spring Boot 2
+4) Docker
 
-![hazelcast-server (2)](https://user-images.githubusercontent.com/5833938/60470478-90022880-9c2e-11e9-9c0f-cd30afbcd607.jpg)
 
-| Service Name        | port | Comments                       |  
-| ------------------- | -----| -------------------------------|
-| discover-server     | 8761 | Eureka discovery server        |
-| config-server       | 8888 | Cloud Config Server            |
+| Service Name           | port | Comments                       |  
+| -----------------------| -----| -------------------------------|
+| discovery-server       | 8761 | Eureka discovery server        |
+| config-server          | 8888 | Cloud Config Server            |
 | client-config-first    | 8763 | client service instance 1      |
-| client-service-2    | 8764 | client service instance 2      |
+| client-discovery-first | 8764 | client service instance 2      |
 
 ## What's in here ??
-This project is an working example of hazelcast clustering using Eureka Discovery Service. There are 3 main components as depicted in the picture above. 1) Discovery Server for service registery and service discovery. 2) Hazelcast servers (2) and 3) Hazelcast client. Hazelcast servers are capable of a member joining mechanism who discover each other using hazelcast group name and creates a join. They are also responsible for creation of distributed objects such as map and queues. Hazelcast client joins the hazlecast cluster using Eureka. 
+This project is a working example of Spring Cloud Config Server with 2 client services.
 
-## How to deploy and test ??
-1. Run as standalone Spring boot app
+1) client-config-first - This service connects to Config server on bootstrap, obtains the location of Eureka server to register itself along with app specific properties from yml.
+2) client-discovery-first - This service connects to Eureka server first and discovers config server's location to obtain its properties.
 
-Start the services in order...Discovery, Hazelcast server and hazelcast client. Although you can start in any order, but following the mentioned order will gauruantee a clean start. Use the following VM arguments for each
+## How does it work
+
+Spring Cloud Config server offers two ways of its clients to connect to Config server. Config first and Discovery first..
+
+### Config first 
+
+Config servers client applications connect to Config server first on bootstrap and obtains rest of the properties need for it to function.
+You can also add more properties in the bootstrap but that defeats the whole purpose of having a centralized config server.
+
 ```
-- Hazelcast Server : -Dhazelcast.port=5701
-- Hazelcast Client : -Deureka.client.props=eureka-client-local -Xms1024m -Xmx2048m
+spring:
+  application:
+    name: client-config-first
+  profiles:
+    active: local
+  cloud:
+    config:
+      uri: ${CONFIG_URI:http://localhost:8888}
+      fail-fast: true
+      retry:
+        max-attempts: 20
+        max-interval: 15000
+        initial-interval: 10000
+```     
+
+Lets breakdown the above configuration.
+1. cloud.config.uri         - this is fixed and known url of your config server.
+2. cloud.discovery.enabled  - by default false. So I haven't included it here.
+3. cloud.fail-fast          - true, if you want your service to fail and retry if config server is not available yet to connect.
+4. cloud.retry.max-attempt  - Maximum attempts this service would retry to connect to config.
+5. cloud.retry.max-interval - interval time between every retry.
+6. cloud.retry.initial-interval - interval time for the first retry.
+
+### Discovery first
+
+Config server's client applications connect to Discovery server first on bootstrap and registers itself. Then it discovers config servers location from Eureka
+and connects to config server to obtain its properties.
+
 ```
-   Please note, if you want to start more than one hazelcast-server instances to test member join, then you must also provide    server.port and hazelcast.port for additional instances. 
-   `Example: -Dserver.port=8763 -Dhazelcast.port=5702`. 
-   Same applies to hazelcast-client as well but client requires `server.port` property only.
-   
- 2. Running on Docker locally
-   
-    Execute docker-compose.yaml on your local docker engine. Compose will spin 5 containers. 1 Eureka server,2 hazelcast    
-    servers and 2 hazelcast clients. Port numbers are mentioned in the compose file.
-    
- 3. Running on Google Kubernetes Engine (GKE)
-    
-    Go thru `commands.txt` file, it is a cheat sheet of `kube` commands required specific to this project.
-    
-    ##### Pre-requisites
-    
-    Install the Google Cloud SDK, which includes the `gcloud` command-line tool. Using the gcloud command line tool, install 
-    the Kubernetes command-line tool. `kubectl` is used to communicate with   Kubernetes, which is the cluster orchestration 
-    system of GKE clusters:
+spring:
+  application:
+    name: client-discovery-first
+  profiles:
+    active: local
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        max-attempts: 20
+        max-interval: 15000
+        initial-interval: 10000
+      discovery:
+        enabled: true
+        service-id: config-server
+server:
+  port: 8764
 
-    `gcloud components install kubectl`
-
-    
-Use ```/actuator/health``` on hazelcast server to view custom implemented health endpoint to view hazelcast-servers member join.      
-    
- ### Test
- 
- #### The best way to test is "put" on one hazelcast-client instance and "get" on another hazelcast-client instance. 
- 
- There are 2 sets of API endpoints to test
-- Map
-   - /map/put?key=xx&value=yyy
-   - /map/get?key=xx
-- Queue
-   - /queue/put?value=xx
-   - /queue/get
-   
- ### Happy Coding !!!! :+1::shipit:  
+eureka:
+  client:
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+```     
+Lets breakdown the above configuration.
+1. cloud.discovery.enabled          - true, this is the most important configuration.
+2. cloud.discovery.service-id       - spring.application.name of your config server. This is the name config server is registered with Eureka.
+3. eureka.client.enabled            - true
+4. eureka.client.serviceUrl.defaultZone - Fixed url of Eureka server.
 
