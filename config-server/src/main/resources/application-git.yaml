@@ -25,6 +25,10 @@ spring:
             config-server/src/main/resources/config/client-discovery-first
           username: prasanna29387
           password: Yamu2429$
+    bus:
+      enabled: true
+    kafka:
+      bootstrap-servers: http://192.168.1.247:9092
 eureka:
   client:
     register-with-eureka: true
