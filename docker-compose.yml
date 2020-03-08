@@ -1,5 +1,29 @@
 version: '3'
+networks:
+  kafka-net:
+    driver: bridge
 services:
+  zookeeper-server:
+    image: 'bitnami/zookeeper:latest'
+    networks:
+      - kafka-net
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka-server:
+    image: 'bitnami/kafka:latest'
+    networks:
+      - kafka-net
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.247:9092
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper-server
+
   eureka-server:
     image: discovery-server-v1-cc
     container_name: discovery-server-cc
@@ -19,12 +43,14 @@ services:
       - "8888:8888"
     depends_on:
       - eureka-server
+      - kafka-server
     environment:
       EUREKA_URI: http://eureka-server:8761/eureka
+      KAFKA_ADDR: http://kafka-server:9092
       spring.profiles.active: git
     links:
       - eureka-server:eureka-server
-
+      - kafka-server:kafka-server
   client-config-first:
     image: client-config-first-v1-cc
     container_name: client-config-first
@@ -39,23 +65,6 @@ services:
     environment:
       EUREKA_URI: http://eureka-server:8761/eureka
       CONFIG_URI: http://config-server:8888
-    links:
-      - eureka-server:eureka-server
-      - config-server:config-server
-
-  client-discovery-first:
-    image: client-discovery-first-v1-cc
-    container_name: client-discovery-first
-    build:
-      context: ./client-discovery-first
-      dockerfile: deploy/Dockerfile
-    ports:
-      - "8764:8764"
-    depends_on:
-      - eureka-server
-      - config-server
-    environment:
-      EUREKA_URI: http://eureka-server:8761/eureka
     links:
       - eureka-server:eureka-server
       - config-server:config-server
