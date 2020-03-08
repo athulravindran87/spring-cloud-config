@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {ConfigServerApplication.class},
-        properties = {"eureka.client.enabled=false"},
+        properties = {"eureka.client.enabled=false", "spring.cloud.bus.enabled=false"},
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 @ActiveProfiles("native")
