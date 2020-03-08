@@ -12,5 +12,12 @@ spring:
         max-attempts: 20
         max-interval: 15000
         initial-interval: 10000
+#    bus:
+#      refresh:
+#        enabled: true
+#      env:
+#        enabled: true
+#  kafka:
+#    bootstrap-servers: http://192.168.1.247:9092
 server:
   port: 8763
