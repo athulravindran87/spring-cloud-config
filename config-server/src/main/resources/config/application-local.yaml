@@ -3,14 +3,6 @@ spring:
     active: local
   cloud:
     client.hostname: ${spring.cloud.client.ip-address:localhost}
-    bus:
-      refresh:
-        enabled: true
-      env:
-        enabled: true
-  kafka:
-    bootstrap-servers: http://192.168.1.247:9092
-
 management:
   endpoints:
     web:
