@@ -271,7 +271,7 @@
                             <forcePull>true</forcePull>
                             <images>
                                 <image>
-                                    <name>gcr.io/spring-cloud-config/${project.artifactId}</name>
+                                    <name>gcr.io/spring-cloud-config-server/${project.artifactId}</name>
                                     <build>
                                         <tags>
                                             <tag>latest</tag>
