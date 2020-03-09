@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-service
+spec:
+  selector:
+    app: eureka-server
+  ports:
+    - protocol: TCP
+      port: 8761
+      targetPort: 8761
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-deployment
+  labels:
+    app: eureka-server
+spec:
+  selector:
+    matchLabels:
+      app: eureka-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eureka-server
+    spec:
+      containers:
+        - name: discovery-server
+          image: gcr.io/spring-cloud-config-server/discovery-server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8761
