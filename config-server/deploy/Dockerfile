@@ -11,7 +11,7 @@ COPY /target/config-server-0.1-SNAPSHOT.jar /tmp/config-server.jar
 
 WORKDIR /tmp
 
-EXPOSE 8888
+EXPOSE 8762
 
 # Run the jar file
 ENTRYPOINT ["java","-jar","config-server.jar"]
