@@ -21,7 +21,7 @@ import java.util.Objects;
 public class RefreshController {
 
 
-    @PostMapping(value = "/git", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/git")
     public ResponseEntity<String> gitRefresh(@RequestBody String payload) throws Exception {
 
         log.info("Payload {}", payload);
