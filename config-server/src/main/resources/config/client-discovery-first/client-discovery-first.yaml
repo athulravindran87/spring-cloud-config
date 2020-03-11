@@ -2,5 +2,5 @@ server:
   port: 8764
 
 test:
-  name: New Guy 2
-  phone: 123-456-7894
+  name: New Guy 3
+  phone: 123-456-7895
