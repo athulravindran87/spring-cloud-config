@@ -1,4 +1,4 @@
-# Spring Cloud Config Server
+# Spring Cloud Config Server - Auto Refresh using Apache Kafka
 A Spring Cloud Config Server - A demonstration of Discovery first and Config first.
 
 ## Stack:                   	         
@@ -6,17 +6,18 @@ A Spring Cloud Config Server - A demonstration of Discovery first and Config fir
 2) Cloud Config Server                          
 3) Spring Boot 2
 4) Docker
+5) Apache Kafka
 
 
 | Service Name           | port | Comments                       |  
 | -----------------------| -----| -------------------------------|
 | discovery-server       | 8761 | Eureka discovery server        |
-| config-server          | 8888 | Cloud Config Server            |
+| config-server          | 8762 | Cloud Config Server            |
 | client-config-first    | 8763 | client service instance 1      |
 | client-discovery-first | 8764 | client service instance 2      |
 
 ## What's in here ??
-This project is a working example of Spring Cloud Config Server with 2 client services.
+This project is a working example of Spring Cloud Config Server with 2 client services and auto refresh using Spring Cloud Bus and Apache Kafka deployed on Kubernetes.
 
 1) client-config-first - This service connects to Config server on bootstrap, obtains the location of Eureka server to register itself along with app specific properties from yml.
 2) client-discovery-first - This service connects to Eureka server first and discovers config server's location to obtain its properties.
@@ -92,3 +93,4 @@ Lets breakdown the above configuration.
 3. eureka.client.enabled            - true
 4. eureka.client.serviceUrl.defaultZone - Fixed url of Eureka server.
 
+Please follow the link on medium.com for Auto refresh using Kafka and Spring Cloud Bus
