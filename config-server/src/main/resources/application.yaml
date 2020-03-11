@@ -27,9 +27,7 @@ spring:
             classpath:/config/client-config-first,
             classpath:/config/client-discovery-first
     bus:
-      enabled: true
-  kafka:
-    bootstrap-servers: ${KAFKA_ADDR:http://localhost:9092}
+      enabled: false
   application:
     name: config-server
 eureka:
