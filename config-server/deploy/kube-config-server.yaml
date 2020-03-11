@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-service
+spec:
+  selector:
+    app: config-server
+  ports:
+    - protocol: TCP
+      port: 8762
+      targetPort: 8762
+      name: config-server-port
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-deployment
+  labels:
+    app: config-server
+spec:
+  selector:
+    matchLabels:
+      app: config-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: config-server
+    spec:
+      containers:
+        - name: config-server
+          image: gcr.io/spring-cloud-config-server/config-server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8762
+          env:
+            - name: EUREKA_URI
+              value: http://eureka:admin@eureka-service:8761/eureka
+            - name: KAFKA_ADDR
+              value: http://kafka-service:9092
+            - name: spring.profiles.active
+              value: git
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP

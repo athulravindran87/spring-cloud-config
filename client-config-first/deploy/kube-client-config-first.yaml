@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-config-first
+spec:
+  selector:
+    app: client-config-first
+  ports:
+    - protocol: TCP
+      port: 8763
+      targetPort: 8763
+  type: LoadBalancer
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-config-first-deployment
+  labels:
+    app: client-config-first
+spec:
+  selector:
+    matchLabels:
+      app: client-config-first
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: client-config-first
+    spec:
+      containers:
+        - name: client-config-first
+          image: gcr.io/spring-cloud-config-server/client-config-first:latest
+          imagePullPolicy: Always
+          env:
+            - name: EUREKA_URI
+              value: http://eureka:admin@eureka-service:8761/eureka
+            - name: CONFIG_URI
+              value: http://config-service:8762
+            - name: KAFKA_ADDR
+              value: http://kafka-service:9092
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          ports:
+            - containerPort: 8763
