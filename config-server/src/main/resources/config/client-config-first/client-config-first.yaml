@@ -2,5 +2,5 @@ server:
   port: 8763
 
 test:
-  name: New Guy 1
+  name: test name 1
   phone: 123-456-7893
