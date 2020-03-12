@@ -24,7 +24,6 @@ spring:
             config-server/src/main/resources/config/client-config-first,
             config-server/src/main/resources/config/client-discovery-first
           username: prasanna29387
-          password: Yamu2429$
     bus:
       enabled: true
     kafka:
