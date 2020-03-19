@@ -6,7 +6,7 @@ spring:
     active: local
   cloud:
     config:
-      uri: ${CONFIG_URI:http://localhost:8888}
+      uri: ${CONFIG_URI:http://localhost:8762}
       fail-fast: true
       retry:
         max-attempts: 20
