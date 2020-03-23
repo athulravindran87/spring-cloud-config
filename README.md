@@ -94,3 +94,4 @@ Lets breakdown the above configuration.
 4. eureka.client.serviceUrl.defaultZone - Fixed url of Eureka server.
 
 Please follow the link on medium.com for Auto refresh using Kafka and Spring Cloud Bus
+https://medium.com/@athulravindran/spring-cloud-config-server-all-you-need-know-auto-refresh-kafka-kubernetes-93182c697836
